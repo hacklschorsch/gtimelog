@@ -763,6 +763,13 @@ class MainWindow:
             self.timelog.whole_history().to_csv_daily(f)
         self.spawn(self.settings.spreadsheet, tempfn)
 
+    def on_open_billing_spreadsheet_activate(self, widget):
+        """ Report -> Stats for billing in Spreadsheet"""
+        tempfn = tempfile.mktemp(suffix='gtimelog.csv') # XXX unsafe!
+        with open(tempfn, 'w') as f:
+            self.timelog.whole_history().to_csv_billing(f)
+        self.spawn(self.settings.spreadsheet, tempfn)
+
     def on_edit_timelog_activate(self, widget):
         """File -> Edit timelog.txt"""
         self.spawn(self.settings.editor, '"%s"' % self.timelog.filename)

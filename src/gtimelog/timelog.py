@@ -348,6 +348,28 @@ class TimeWindow(object):
             output.write("END:VEVENT\n")
         output.write("END:VCALENDAR\n")
 
+    def to_csv_billing(self, output):
+        """Create a CSV file sortable by date and project."""
+        # output.write("BEGIN:VCALENDAR\n")
+        # output.write("PRODID:-//mg.pov.lt/NONSGML GTimeLog//EN\n")
+        # output.write("VERSION:2.0\n")
+        # dtstamp = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+        output.write("date,duration,project,description\n")
+        for start, stop, duration, entry in self.all_entries():
+            output.write(start.strftime('%Y-%m-%d'))
+            output.write(",")
+
+            output.write("%d" % as_minutes(duration))
+            output.write(",")
+
+            if ': ' in entry:
+                cat, clipped_entry = entry.split(': ', 1)
+                output.write(u"%s,%s" % (cat, clipped_entry))
+            else:
+                output.write(u",%s" % entry)
+
+            output.write("\n")
+
     def to_csv_complete(self, output, title_row=True):
         """Export work entries to a CSV file.
 
