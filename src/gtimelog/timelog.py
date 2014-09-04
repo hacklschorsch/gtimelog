@@ -359,7 +359,7 @@ class TimeWindow(object):
             output.write(start.strftime('%Y-%m-%d'))
             output.write(",")
 
-            output.write("%d" % as_minutes(duration))
+            output.write("%.1f" % as_hours(duration))
             output.write(",")
 
             if ': ' in entry:
