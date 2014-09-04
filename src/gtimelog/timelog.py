@@ -350,10 +350,6 @@ class TimeWindow(object):
 
     def to_csv_billing(self, output):
         """Create a CSV file sortable by date and project."""
-        # output.write("BEGIN:VCALENDAR\n")
-        # output.write("PRODID:-//mg.pov.lt/NONSGML GTimeLog//EN\n")
-        # output.write("VERSION:2.0\n")
-        # dtstamp = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
         output.write("date,duration,project,description\n")
         for start, stop, duration, entry in self.all_entries():
             output.write(start.strftime('%Y-%m-%d'))
