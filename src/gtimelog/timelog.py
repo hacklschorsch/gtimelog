@@ -364,9 +364,9 @@ class TimeWindow(object):
 
             if ': ' in entry:
                 cat, clipped_entry = entry.split(': ', 1)
-                output.write('%s,%s' % (cat.encode('UTF-8'), clipped_entry.encode('UTF-8')))
+                output.write('"%s","%s"' % (cat.encode('UTF-8'), clipped_entry.encode('UTF-8')))
             else:
-                output.write(',%s' % entry.encode('UTF-8'))
+                output.write(',"%s"' % entry.encode('UTF-8'))
 
             output.write("\n")
 
